@@ -1,40 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>MatToolBench Demo</title>
-  <style>
-    body {
-      margin: 0;
-      background: #0f172a;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    h1 {
-      margin-top: 40px;
-    }
-    video {
-      margin-top: 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-  </style>
-</head>
-<body>
+<div class="video-container" onclick="playVideo()">
+  <img id="cover" src="demo_cover.png" class="cover">
+  <div class="play-button"></div>
 
-  <h1>🎬 MatToolBench Demo</h1>
-
-  <video controls width="800">
-    <source src="https://github.com/meiwu5/MatToolBench/releases/download/v1.0/demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+  <video id="video" controls width="800" style="display:none;">
+    <source src="demo.mp4" type="video/mp4">
   </video>
+</div>
 
-  <p style="margin-top:20px;">
-    <a href="https://github.com/meiwu5/MatToolBench/releases/download/v1.0/demo.mp4" style="color:#38bdf8;">
-      ⬇ Download Video
-    </a>
-  </p>
+<style>
+.video-container {
+  position: relative;
+  width: 800px;
+  margin: auto;
+  cursor: pointer;
+}
 
-</body>
-</html>
+.cover {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* ▶ 播放按钮（三角形） */
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+}
+
+.play-button::after {
+  content: '';
+  position: absolute;
+  left: 32px;
+  top: 24px;
+  border-style: solid;
+  border-width: 16px 0 16px 26px;
+  border-color: transparent transparent transparent white;
+}
+</style>
+
+<script>
+function playVideo() {
+  document.getElementById("cover").style.display = "none";
+  document.querySelector(".play-button").style.display = "none";
+
+  const video = document.getElementById("video");
+  video.style.display = "block";
+  video.play();
+}
+</script>
